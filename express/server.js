@@ -3,15 +3,13 @@ const express = require('express');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
+const targetUrl = 'https://marcus.io/';
 
-const router = express.Router();
-router.get('/', (req, res) => {
-  res.set('location', 'https://marcus.io/a11yone');
-  res.status(301).send();
-  res.end();
-});
+function handleRedirect(req, res) {
+  res.redirect(targetUrl);
+}
 
-router.post('/', (req, res) => res.json({ postBody: req.body }));
+app.get('*', handleRedirect);
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
