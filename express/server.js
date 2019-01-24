@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.redirect(301, 'https://marcus.io/a11yone');
+  res.set('location', 'https://marcus.io/a11yone');
+  res.status(301).send();
   res.end();
 });
 
